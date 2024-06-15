@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>ExpenseRecorder</title>
+</head>
+<body>
+	<h1>
+		Hello World!
+	</h1>
+	
+	<div th:each="account: ${accountList}">
+		<p th:text="${account.accountName}">ACCOUNT NAME</p>
+		<p th:text="${account.amount}">AMOUNT</p>
+		<a th:href="@{/account/update(accountID=${account.accountID})}">Update</a>
+		<a th:href="@{/account/delete(accountID=${account.accountID})}">Delete</a>
+	</div>
+	
+	<div th:if = "${#lists.isEmpty(accountList)}">
+		<h3>There is no account.</h3>
+	</div>
+	
+	<a th:href="@{/account/createNewAccount}">Create new account</a>
+	<a th:href="@{/voucher/insert}">Insert voucher</a>
+</body>
+</html>

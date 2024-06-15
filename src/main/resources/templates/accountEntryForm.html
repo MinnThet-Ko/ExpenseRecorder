@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>ExpenseRecorder</title>
+</head>
+<body>
+	<h1>
+		Expense Recorder
+	</h1>
+	
+	<form th:action="${actionType} == 'insert'? @{/account/createNewAccount}:@{/account/update}" method="POST" th:object="${account}">
+		<label for="accountID">Account ID:</label>
+		<input id="accountID" th:type="text" th:field="*{accountID}"/>
+		<br/>
+		
+		<label for="accountName">Account name:</label>
+		<input id="accountName" th:type="text" th:field="*{accountName}"/>
+		<br/>
+		
+		<label for="amount">Amount:</label>
+		<input id="amount" th:type="text" th:field="*{amount}"/>
+		<br/>
+		
+		<input type="submit" value="Submit"/>
+		<br/>
+	</form>
+</body>
+</html>

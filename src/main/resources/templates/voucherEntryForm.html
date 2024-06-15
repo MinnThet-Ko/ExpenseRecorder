@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>ExpenseRecorder</title>
+</head>
+<body>
+	<h1>
+		Expense Recorder
+	</h1>
+	
+	<form th:action="${actionType} == 'insert'? @{/voucher/insert}:@{/voucher/update}" method="POST" th:object="${voucher}">
+		<label for="voucherID">Voucher ID:</label>
+		<input id="voucherID" th:type="text" th:field="*{voucherID}"/>
+		<br/>
+		
+		<label for="voucherDescription">Voucher description:</label>
+		<input id="voucherDescription" th:type="text" th:field="*{voucherDescription}"/>
+		<br/>
+		
+		<label for="voucherDate">Voucher date:</label>
+		<input id="voucherDate" th:type="date" th:field="*{voucherDate}"/>
+		<br/>
+		
+		<label for="voucherAmount">Amount:</label>
+		<input id="voucherAmount" th:type="text" th:field="*{voucherAmount}"/>
+		<br/>
+		
+		<label for="accountID">Account ID:</label>
+		<select id="accountID" th:field="*{accountID}">
+			<option th:each="account:${accountList}" th:value="${account.accountID}" th:utext="${account.accountName}">
+		</select>
+		<br/>
+		
+		<input type="submit" value="Submit"/>
+		<br/>
+	</form>
+</body>
+</html>
