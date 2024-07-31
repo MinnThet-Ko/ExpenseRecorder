@@ -1,29 +1,29 @@
 package com.er.controllers;
 
-import java.util.List;
+import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.er.models.Account;
-import com.er.repositories.JdbcAccountRepository;
-import com.er.repositories.JpaAccountRepository;
+import com.er.models.User;
+import com.er.services.UserService;
 
 @Controller
 public class HomeController {
 
 	@Autowired
-	private JdbcAccountRepository jdbcAccountRepository;
-	
-	@Autowired
-	private JpaAccountRepository accountRepository;
-	
+	private UserService userService;
+
 	@GetMapping("/")
 	public String displayHome(Model model) {
-		List<Account> accountList = (List<Account>) this.accountRepository.findAll();
-		model.addAttribute("accountList", accountList);
+		User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		System.out.println("Details:"+loggedInUser.getEmail());
+		model.addAttribute("accountList", this.userService.getUserAccounts(loggedInUser.getEmail()));
 		return "home";
 	}
 }

@@ -12,18 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.er.models.Account;
-import com.er.repositories.JdbcAccountRepository;
-import com.er.repositories.JpaAccountRepository;
+import com.er.repositories.AccountRepository;
 
 @Controller
 @RequestMapping("/account")
 public class AccountController {
 
 	@Autowired
-	private JdbcAccountRepository accountRepository;
-	
-	@Autowired
-	private JpaAccountRepository jpaAccountRepository;
+	private AccountRepository accountRepository;
 
 	// Methods for creating new account
 	@GetMapping("/createNewAccount")
@@ -39,14 +35,14 @@ public class AccountController {
 		System.out.println("In processAccountEntryForm method:");
 		System.out.println(account.toString());
 		//this.accountRepository.saveAccount(account);
-		this.jpaAccountRepository.save(account);
+		this.accountRepository.save(account);
 		return "redirect:/";
 	}
 
 	@GetMapping("/update")
 	public String displayAccountUpdateForm(@RequestParam(value = "accountID") String accountID, Model model) {
 		//Account resultAccount = this.accountRepository.getAccountByID(accountID);
-		Optional<Account> resultAccount = this.jpaAccountRepository.findById(accountID);
+		Optional<Account> resultAccount = this.accountRepository.findById(accountID);
 		if (resultAccount != null) {
 			model.addAttribute("account", resultAccount.get());
 			model.addAttribute("actionType", "update");
@@ -59,7 +55,7 @@ public class AccountController {
 	public String processAccountUpdateForm(@ModelAttribute Account account, Model model) {
 		System.out.println("In processAccountUpdateForm method:");
 		System.out.println(account.toString());
-		this.accountRepository.updateAccount(account);
+		this.accountRepository.save(account);
 		return "redirect:/";
 	}
 
@@ -67,7 +63,7 @@ public class AccountController {
 	public String processAccountDelete(@ModelAttribute Account account, Model model) {
 		System.out.println("In processAccountDelete method:");
 		System.out.println(account.toString());
-		this.jpaAccountRepository.delete(account);
+		this.accountRepository.delete(account);
 		return "redirect:/";
 	}
 }

@@ -1,9 +1,9 @@
 package com.er.repositories;
 
+import org.springframework.data.repository.CrudRepository;
+
 import com.er.models.Voucher;
 
-public interface VoucherRepository {
-	public boolean insertVoucher(Voucher voucher);
-	public boolean updateVoucher(Voucher voucher);
-	public boolean deleteVoucher(String voucherID);
+public interface VoucherRepository extends CrudRepository<Voucher, String>{
+	
 }

@@ -1,18 +1,17 @@
 package com.er.repositories;
 
-import java.util.List;
+import java.util.Set;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import com.er.models.Account;
+import java.util.List;
 
-public interface AccountRepository{
+
+@Repository
+public interface AccountRepository extends CrudRepository<Account, String>{
 	
-	public boolean saveAccount(Account account);
-	public boolean updateAccount(Account account);
-	public boolean deleteAccount(String accountID);
-	public List<Account> getAllAccount();
-	public Account getAccountByID(String accountID);
-	public boolean updateAmount(String accountID, long amount);
+	public Set<Account> findAll();
 
 }
