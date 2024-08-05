@@ -2,6 +2,7 @@ package com.er.models;
 
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -35,4 +36,10 @@ public class Account {
 	joinColumns = @JoinColumn(name = "account_id"),
 	inverseJoinColumns = @JoinColumn(name = "voucher_id"))
 	private Set<Voucher> vouchers;
+	
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL )
+	@JoinTable(name = "user_accounts",
+	joinColumns = @JoinColumn(name = "account_id"),
+	inverseJoinColumns = @JoinColumn(name = "email"))
+	private User user;
 }

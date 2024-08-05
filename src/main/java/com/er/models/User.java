@@ -4,11 +4,12 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Set;
 
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
@@ -37,7 +38,7 @@ public class User implements UserDetails{
 	@Id
 	private String email;
 	
-	@OneToMany(fetch = FetchType.LAZY)
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "user_accounts",
 	joinColumns = @JoinColumn(name = "email"),
 	inverseJoinColumns = @JoinColumn(name = "account_id"))

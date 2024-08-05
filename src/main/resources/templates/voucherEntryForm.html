@@ -29,7 +29,7 @@
 		<br/>
 		
 		<label for="accountID">Account ID:</label>
-		<select id="accountID" th:field="*{accountID}">
+		<select id="accountID" th:field="*{account}">
 			<option th:each="account:${accountList}" th:value="${account.accountID}" th:utext="${account.accountName}">
 		</select>
 		<br/>

@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.er.models.User;
 import com.er.models.Voucher;
+import com.er.services.AccountService;
 import com.er.services.TransactionService;
+import com.er.services.VoucherService;
 
 
 @Controller
@@ -23,10 +26,17 @@ public class VoucherController {
 	@Autowired
 	private TransactionService transactionService;
 	
+	@Autowired
+	private VoucherService voucherService;
+	
+	@Autowired
+	private AccountService accountService;
+	
 	@GetMapping("/insert")
-	public String displayVoucherEntryForm(Model model, Principal principle) {
+	public String displayVoucherEntryForm(Model model) {
+		User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		model.addAttribute("voucher", new Voucher());
-		model.addAttribute("accountList",((User)principle).getAccounts());
+		model.addAttribute("accountList",this.accountService.getAccountsByUser(loggedInUser));
 		model.addAttribute("actionType", "insert");
 		return "voucherEntryForm";
 	}

@@ -28,6 +28,7 @@ public class UserService implements UserDetailsService {
 
 	public Set<Account> getUserAccounts(String email){
 		User resultUser = this.userRepository.findByEmail(email);
+		System.out.println(resultUser);
 		return resultUser.getAccounts();
 	}
 
