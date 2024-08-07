@@ -1,0 +1,9 @@
+.header .logo {
+	font-size: large;
+	color: white;
+}
+
+.header {
+	background-color: gray;
+	height: 40px;
+}

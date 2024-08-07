@@ -1,0 +1,9 @@
+.sidebar {
+      height: 100%;
+
+      position: fixed;
+      background-color: lightblue;
+      overflow-y: hidden;
+      transition: 0.5s;
+
+    }
