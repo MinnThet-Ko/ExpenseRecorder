@@ -21,10 +21,10 @@ public class TransactionService {
 	
 	@Transactional
 	public void saveTransaction(Voucher voucher) {
-//		Account currentAccount = voucher.getAccount();
-//		currentAccount.setAmount(voucher.getVoucherAmount()+currentAccount.getAmount());
-//		this.voucherRepository.save(voucher);
-//		this.accountRepository.save(currentAccount);
+		Account currentAccount = voucher.getAccount();
+		currentAccount.setAmount(voucher.getVoucherAmount()+currentAccount.getAmount());
+		this.voucherRepository.save(voucher);
+		this.accountRepository.save(currentAccount);
 	}
 
 }

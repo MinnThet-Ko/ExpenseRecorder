@@ -1,30 +1,40 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/html"
+	xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>ExpenseRecorder</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+	crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" th:href="@{css/header_style.css}">
+<link rel="stylesheet" type="text/css" th:href="@{css/sidebar_styles.css}">
 </head>
 <body>
-	<h1>
-		Expense Recorder
-	</h1>
-	<div class="container">
-	<div th:each="account: ${accountList}" class="row">
-		<p th:text="${account.accountName}" class="col">ACCOUNT NAME</p>
-		<p th:text="${account.amount}" class="col">AMOUNT</p>
-		<div class ="col">
-		<a th:href="@{/account/update(accountID=${account.accountID})}">Update</a>
-		<a th:href="@{/account/delete(accountID=${account.accountID})}">Delete</a>
+	<div th:replace="~{header :: header}">HEADER_FRAGMENT</div>
+	<div th:replace="~{/sidebar.html :: sidebar}">NAVBAR_FRAGMENT</div>
+	<div class="container"  th:onclick="hideSidebar()">
+		<div th:each="account: ${accountList}" class="row">
+			<p th:text="${account.accountName}" class="col">ACCOUNT NAME</p>
+			<p th:text="${account.amount}" class="col">AMOUNT</p>
+			<div class="col">
+				<a th:href="@{/account/update(accountID=${account.accountID})}">Update</a>
+				<a th:href="@{/account/delete(accountID=${account.accountID})}">Delete</a>
+			</div>
+		</div>
+
+		<div th:if="${#lists.isEmpty(accountList)}">
+			<h3>There is no account.</h3>
 		</div>
 	</div>
-	
-	<div th:if = "${#lists.isEmpty(accountList)}">
-		<h3>There is no account.</h3>
-	</div>
-	</div>
-	<a th:href="@{/account/createNewAccount}">Create new account</a>
-	<a th:href="@{/voucher/insert}">Insert voucher</a>
+
+
+	<script type="text/javascript" th:src="@{/scripts/sidebar_toggle.js}"></script>
 </body>
 </html>
