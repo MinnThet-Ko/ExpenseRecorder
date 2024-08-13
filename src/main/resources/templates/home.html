@@ -14,12 +14,14 @@
 	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
 	crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" th:href="@{css/header_style.css}">
-<link rel="stylesheet" type="text/css" th:href="@{css/sidebar_styles.css}">
+<link rel="stylesheet" type="text/css"
+	th:href="@{css/sidebar_styles.css}">
 </head>
 <body>
 	<div th:replace="~{header :: header}">HEADER_FRAGMENT</div>
 	<div th:replace="~{/sidebar.html :: sidebar}">NAVBAR_FRAGMENT</div>
-	<div class="container"  th:onclick="hideSidebar()">
+	<div class="container" th:onclick="hideSidebar()">
+
 		<div th:each="account: ${accountList}" class="row">
 			<p th:text="${account.accountName}" class="col">ACCOUNT NAME</p>
 			<p th:text="${account.amount}" class="col">AMOUNT</p>

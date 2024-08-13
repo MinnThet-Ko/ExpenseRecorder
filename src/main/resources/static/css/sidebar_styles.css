@@ -1,9 +1,19 @@
 .sidebar {
-      height: 100%;
+	height: 100%;
+	position: fixed;
+	background-color: #EEEEEE;
 
-      position: fixed;
-      background-color: lightblue;
-      overflow-y: hidden;
-      transition: 0.5s;
+	display: none;
+	transition: left 0.5s ease;
+}
 
-    }
+.sidebar .nav-item {
+	margin: 10px;
+	text-decoration: none;
+	color: black;
+}
+
+.sidebar .nav-item  a {
+	text-decoration: none;
+	color: black;
+}

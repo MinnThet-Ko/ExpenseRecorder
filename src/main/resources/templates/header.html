@@ -10,7 +10,7 @@
 <body>
 
 	<div th:fragment="header" class="header d-flex align-items-center">
-	<div class = "sidebar-icon" th:onclick="showSidebar()">
+	<div class = "sidebar-icon" th:onclick="toggleSidebar()">
 		<img  th:src="@{/icons/three-bars.svg}">
 	</div>
 		<div class = "logo">
