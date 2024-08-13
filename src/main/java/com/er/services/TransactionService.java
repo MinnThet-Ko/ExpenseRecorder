@@ -20,8 +20,11 @@ public class TransactionService {
 	private VoucherRepository voucherRepository;
 	
 	@Transactional
-	public void saveTransaction(Voucher voucher) {
+	public void saveTransaction(Voucher voucher, String transactionType) {
 		Account currentAccount = voucher.getAccount();
+		if(transactionType.equals("withdraw")) {
+			voucher.setVoucherAmount(-1 * voucher.getVoucherAmount());
+		}
 		currentAccount.setAmount(voucher.getVoucherAmount()+currentAccount.getAmount());
 		this.voucherRepository.save(voucher);
 		this.accountRepository.save(currentAccount);

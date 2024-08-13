@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.er.models.User;
 import com.er.models.Voucher;
@@ -42,9 +43,10 @@ public class VoucherController {
 	}
 	
 	@PostMapping("/insert")
-	public String processVoucherEntry(@ModelAttribute Voucher voucher, Model model) {
+	public String processVoucherEntry(@RequestParam(name = "transactionType") String transactionType,@ModelAttribute Voucher voucher, Model model) {
 		System.out.println("In processVoucherEntry method:");
-		this.transactionService.saveTransaction(voucher);
+		System.out.println("Transaction type:"+transactionType);
+		this.transactionService.saveTransaction(voucher, transactionType);
 		return "redirect:/";
 	}
 
